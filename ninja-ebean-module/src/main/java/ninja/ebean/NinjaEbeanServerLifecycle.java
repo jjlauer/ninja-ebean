@@ -43,6 +43,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.avaje.agentloader.AgentLoader;
 import org.slf4j.Logger;
 
 /**
@@ -81,6 +82,20 @@ public class NinjaEbeanServerLifecycle {
     public final void startServer(){
         logger.info("Starting Ebeans Module.");
 
+        // The ebean agent will enhance entities at runtime. Not recommended
+        // for production but very useful during development and testing.
+        // In order for it to work its critical its loaded prior to any sort
+        // of class loading (e.g. searching for entities)
+        boolean ebeanAgentLoad = ninjaProperties.getBooleanWithDefault(
+                NinjaEbeanProperties.EBEAN_AGENT_LOAD, false);
+        
+        String ebeanAgentParams = ninjaProperties.getWithDefault(
+                NinjaEbeanProperties.EBEAN_AGENT_PARAMS, "debug=1");
+        
+        if (ebeanAgentLoad) {
+            NinjaEbeanAgentLoader.tryLoadAgent(logger, ebeanAgentParams);
+        }
+        
         // /////////////////////////////////////////////////////////////////////
         // Setup basic parameters
         // /////////////////////////////////////////////////////////////////////

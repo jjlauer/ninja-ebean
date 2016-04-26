@@ -42,6 +42,9 @@ public interface NinjaEbeanProperties {
      * ebean.models=model.MyModel1,com.company.models.*
      * 
      */
+    public final String EBEAN_AGENT_LOAD = "ebean.agent.load";
+    public final String EBEAN_AGENT_PARAMS = "ebean.agent.params";
+    
     public final String EBEAN_MODELS = "ebean.models";
 
     public final String EBEAN_DDL_GENERATE = "ebean.ddl.generate";

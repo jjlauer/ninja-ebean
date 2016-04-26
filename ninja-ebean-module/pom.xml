@@ -37,6 +37,13 @@
         </dependency>
         
         <dependency>
+            <groupId>org.avaje</groupId>
+            <artifactId>avaje-agentloader</artifactId>
+            <version>2.1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-core</artifactId>
             <version>${ninja.version}</version>
